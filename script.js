@@ -4,17 +4,14 @@ const addButton = document.querySelector(".btn-add");
 const section = document.getElementById("section-list");
 const deleteAll = document.querySelector(".delete-all");
 
-const ui = new UI();
-const storage = new Storage();
-
 eventListeners();
 
 function eventListeners() {
   form.addEventListener("submit", addTodo);
   // addButton.addEventListener("click", addTodo);
   document.addEventListener("DOMContentLoaded", function () {
-    let todos = storage.getToDosFromStorage();
-    ui.loadAllToDos(todos);
+    let todos = Storage.getToDosFromStorage();
+    UI.loadAllToDos(todos);
   });
 
   section.addEventListener("click", deleteTodo);
@@ -26,31 +23,31 @@ function addTodo(e) {
 
   if (todo === "") {
     // ERROR
-    ui.displayMessage("Please, write your todo", "error");
+    UI.displayMessage("Please, write your todo", "error");
   } else {
     const newTodo = new Todo(todo);
 
-    storage.addToDotoStorage(newTodo);
+    Storage.addToDotoStorage(newTodo);
 
-    ui.addToDotoUI(newTodo);
-    ui.displayMessage("Successfully added", "success");
+    UI.addToDotoUI(newTodo);
+    UI.displayMessage("Successfully added", "success");
   }
-  ui.clearInputs(todoElement);
+  UI.clearInputs(todoElement);
   e.preventDefault();
 }
 
 function deleteTodo(e) {
   if (e.target.className === "fas fa-trash-alt") {
-    ui.deleteToDoFromUI(e.target.parentElement);
+    UI.deleteToDoFromUI(e.target.parentElement);
 
-    storage.deleteToDoFromStorage(
+    Storage.deleteToDoFromStorage(
       e.target.parentElement.parentElement.textContent
     );
-    ui.displayMessage("Successful delete", "success");
+    UI.displayMessage("Successful delete", "success");
   }
 }
 
 function deleteAllTodo() {
-  ui.clearAllToDoFromUI();
-  storage.clearAllToDoFromStorage();
+  UI.clearAllToDoFromUI();
+  Storage.clearAllToDoFromStorage();
 }

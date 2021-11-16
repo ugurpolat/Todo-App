@@ -1,36 +1,36 @@
-function Storage() {}
+class Storage {
+  static addToDotoStorage(newTodo) {
+    let todos = this.getToDosFromStorage();
 
-Storage.prototype.addToDotoStorage = function (newTodo) {
-  let todos = this.getToDosFromStorage();
-
-  todos.push(newTodo);
-  localStorage.setItem("todos", JSON.stringify(todos));
-};
-
-Storage.prototype.getToDosFromStorage = function () {
-  let todos;
-
-  if (localStorage.getItem("todos") === null) {
-    todos = [];
-  } else {
-    todos = JSON.parse(localStorage.getItem("todos"));
+    todos.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify(todos));
   }
 
-  return todos;
-};
+  static getToDosFromStorage() {
+    let todos;
 
-Storage.prototype.deleteToDoFromStorage = function (targetTodo) {
-  let todos = this.getToDosFromStorage();
-
-  todos.forEach(function (todo, index) {
-    if (todo.text === targetTodo.trim()) {
-      todos.splice(index, 1);
+    if (localStorage.getItem("todos") === null) {
+      todos = [];
+    } else {
+      todos = JSON.parse(localStorage.getItem("todos"));
     }
-  });
 
-  localStorage.setItem("todos", JSON.stringify(todos));
-};
+    return todos;
+  }
 
-Storage.prototype.clearAllToDoFromStorage = function () {
-  localStorage.removeItem("todos");
-};
+  static deleteToDoFromStorage(targetTodo) {
+    let todos = this.getToDosFromStorage();
+
+    todos.forEach(function (todo, index) {
+      if (todo.text === targetTodo.trim()) {
+        todos.splice(index, 1);
+      }
+    });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
+  static clearAllToDoFromStorage() {
+    localStorage.removeItem("todos");
+  }
+}
