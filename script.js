@@ -22,7 +22,6 @@ function addTodo(e) {
   const todo = todoElement.value.trim();
 
   if (todo === "") {
-    // ERROR
     UI.displayMessage("Please, write your todo", "error");
   } else {
     const newTodo = new Todo(todo);

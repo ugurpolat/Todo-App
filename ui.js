@@ -1,21 +1,22 @@
 class UI {
-  static addToDotoUI(newTodo) {
+  static createElement(newElement) {
     const todoList = document.getElementById("todo-list");
-    // todoList.innerHTML += `
-    // <li>${newTodo.text}<a class="delete-todo" href="#">
-    //   <i class="fas fa-trash-alt"></i>
-    //   </a>
-    // </li>`;
+
     const li = document.createElement("li");
     const a = document.createElement("a");
     const i = document.createElement("i");
 
-    li.textContent = newTodo.text;
+    li.textContent = newElement.text;
     a.className = "delete-todo";
+    a.href = "#";
     i.className = "fas fa-trash-alt";
     a.appendChild(i);
     li.appendChild(a);
     todoList.appendChild(li);
+  }
+
+  static addToDotoUI(newTodo) {
+    this.createElement(newTodo);
   }
 
   static clearInputs(element1) {
@@ -37,15 +38,8 @@ class UI {
   }
 
   static loadAllToDos(todos) {
-    const todoList = document.getElementById("todo-list");
-
     todos.forEach((todo) => {
-      todoList.innerHTML += `
-      <li>${todo.text}
-      <a class="delete-todo" href="#">
-      <i class="fas fa-trash-alt"></i>
-      </a>
-      </li>`;
+      this.createElement(todo);
     });
   }
 
